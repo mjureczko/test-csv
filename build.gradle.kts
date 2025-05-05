@@ -41,7 +41,8 @@ tasks.shadowJar {
 }
 
 jlink {
-    imageName.set("testcsv-app")
+    imageName.set("Testy")
+    options.addAll("--add-modules", "javafx.controls")
 
     jpackage {
         installerType = "exe" // Only valid on Windows

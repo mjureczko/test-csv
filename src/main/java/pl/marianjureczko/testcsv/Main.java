@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 enum State {
     WAITING_FOR_RESPONSE,
     SUCCESS,
@@ -125,8 +128,17 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        System.out.println("start");
-        quiz = new Quiz(new DataRepository().loadQuestions());
-        launch(args);
+        try (PrintWriter writer = new PrintWriter("log.txt")) {
+            writer.println("start");
+            try {
+                quiz = new Quiz(new DataRepository().loadQuestions());
+                launch(args);
+            } catch(Exception e) {
+                writer.println(e.getMessage());
+                e.printStackTrace(writer);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
