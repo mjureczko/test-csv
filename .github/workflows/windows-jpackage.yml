@@ -32,7 +32,7 @@ jobs:
 
       - name: Create a new Git tag
         run: |
-          if git rev-parse v${{ github.run_number }} >/dev/null 2>&1; then
+          if (git rev-parse v${{ github.run_number }} >/dev/null 2>&1); then
             echo "Tag already exists. Skipping creation."
           else
             git tag -a v${{ github.run_number }} -m "Release version ${{ github.run_number }}"
