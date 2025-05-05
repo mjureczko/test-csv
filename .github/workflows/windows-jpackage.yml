@@ -31,10 +31,19 @@ jobs:
           git config --global user.email "actions@github.com"
 
       - name: Create a new Git tag
-        run: git tag -a v${{ github.run_number }} -m "Release version ${{ github.run_number }}"
+        run: |
+          if git rev-parse v${{ github.run_number }} >/dev/null 2>&1; then
+            echo "Tag already exists. Skipping creation."
+          else
+            git tag -a v${{ github.run_number }} -m "Release version ${{ github.run_number }}"
+          fi
 
       - name: Push tag to GitHub
-        run: git push origin v${{ github.run_number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}
+          git push origin v${{ github.run_number }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
