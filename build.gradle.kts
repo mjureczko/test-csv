@@ -41,17 +41,21 @@ tasks.shadowJar {
 }
 
 jlink {
-    imageName.set("Testy")
-    options.addAll("--add-modules", "javafx.controls")
+    imageName.set("testcsv-app")
+    addExtraDependencies("required")
+
+    launcher {
+        name = "Testy"
+    }
 
     jpackage {
-        installerType = "exe" // Only valid on Windows
+        installerType = "exe"
         installerOptions.addAll(
                 listOf(
-                        "--win-shortcut", // creates a Start Menu shortcut
-                        "--win-menu",     // adds to Windows menu
-                        "--win-dir-chooser", // allows install location selection
-                        "--win-per-user-install" // user-level install
+                        "--win-shortcut",
+                        "--win-menu",
+                        "--win-dir-chooser",
+                        "--win-per-user-install"
                 )
         )
     }
