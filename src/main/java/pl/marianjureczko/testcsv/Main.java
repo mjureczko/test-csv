@@ -63,6 +63,7 @@ public class Main extends Application {
         layout.setPadding(new Insets(20));
 
         Scene scene = new Scene(layout, 800, 300);
+        scene.getStylesheets().add(".root { -fx-font-family: \"Arial\"; }");
 
         primaryStage.setTitle("Testy historyczne");
         primaryStage.setScene(scene);
@@ -129,6 +130,8 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         try (PrintWriter writer = new PrintWriter("log.txt")) {
+            System.setProperty("user.language", "pl");
+            System.setProperty("user.region", "PL");
             writer.println("start");
             try {
                 quiz = new Quiz(new DataRepository().loadQuestions());
