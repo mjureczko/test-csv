@@ -49,7 +49,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "v${{ github.run_number }}"
-          release_name: "Release ${{ github.run_number }}"
+          name: "Release ${{ github.run_number }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -57,5 +57,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: build/jpackage/*.exe
+          tag_name: "v${{ github.run_number }}"  # Ensure to provide the correct tag here
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
