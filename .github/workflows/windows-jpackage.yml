@@ -25,6 +25,12 @@ jobs:
       - name: Build and package with jpackage
         run: ./gradlew jpackage
 
+      - name: Create a new Git tag
+        run: git tag -a v${{ github.run_number }} -m "Release version ${{ github.run_number }}"
+
+      - name: Push tag to GitHub
+        run: git push origin v${{ github.run_number }}
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
