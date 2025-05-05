@@ -25,8 +25,17 @@ jobs:
       - name: Build and package with jpackage
         run: ./gradlew jpackage
 
-      - name: Upload installer artifact
-        uses: actions/upload-artifact@v4
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
         with:
-          name: Windows-Installer
-          path: build/jpackage/*.exe
+          name: "Release ${{ github.run_number }}"
+          tag_name: "v${{ github.run_number }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload installer to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/jpackage/*.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
