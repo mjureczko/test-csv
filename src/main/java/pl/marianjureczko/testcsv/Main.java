@@ -63,7 +63,7 @@ public class Main extends Application {
         layout.setPadding(new Insets(20));
 
         Scene scene = new Scene(layout, 800, 300);
-        scene.getStylesheets().add(".root { -fx-font-family: \"Arial\"; }");
+        layout.setStyle("-fx-font-family: 'Arial';");
 
         primaryStage.setTitle("Testy historyczne");
         primaryStage.setScene(scene);
