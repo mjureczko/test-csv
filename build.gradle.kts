@@ -20,6 +20,10 @@ dependencies {
     testImplementation("com.ocadotechnology.gembus:test-arranger:1.6.4")
 }
 
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+}
+
 tasks.test {
     useJUnitPlatform()
 }
@@ -32,6 +36,7 @@ javafx {
 application {
     mainClass.set("pl.marianjureczko.testcsv.Main")
     mainModule.set("pl.marianjureczko.testcsv")
+    applicationDefaultJvmArgs = listOf("-Dfile.encoding=UTF-8")
 }
 
 tasks.shadowJar {
